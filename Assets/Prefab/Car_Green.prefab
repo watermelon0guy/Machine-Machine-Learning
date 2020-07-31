@@ -733,7 +733,7 @@ MonoBehaviour:
   overallFitness: 0
   distanceMultipler: 1.5
   avgSpeedMultiplier: 0.4
-  sensorMultiplier: 0.1
+  sensorMultiplier: 0.6
   inputsOfNN: []
   outputsOfNN: []
 --- !u!114 &-5221828741069929141
