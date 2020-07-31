@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa050e67b3419c849a70d1876916e6b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 73aa93efecf87e241a979396a6ecff8f, type: 3}
   m_Name: Creature
   m_EditorClassIdentifier: 
-  creature: {fileID: 0}
-  curGenome: 0
-  curGeneration: 0
-  aliveCreature: 176
+  aliveCreature: 1562

@@ -78,19 +78,25 @@ public class Car : MonoBehaviour
         }
 
         timeSinceStart += Time.fixedDeltaTime;
-
+        timeForCheckPos += Time.fixedDeltaTime;
         CalculateFitness();
     }
 
     private void CalculateFitness()
     {
-        if (timeForCheckPos <= 1)
+        
+        if (timeForCheckPos >= 1)
         {
             timeForCheckPos = 0;
             totalDistanceTravelled += Vector3.Distance(transform.position, lastPosition);
             avgSpeed = totalDistanceTravelled / timeSinceStart;
+            if (Vector3.Distance(transform.position, lastPosition) < 0.05)
+            {
+                alive = false;
+                inf.aliveCreature -= 0;
+            }
 
-            overallFitness = (totalDistanceTravelled * distanceMultipler) + (FitnessOfSensors() * sensorMultiplier);
+            overallFitness = (totalDistanceTravelled * distanceMultipler) + (FitnessOfSensors() * sensorMultiplier) +(avgSpeed * avgSpeedMultiplier);
             lastPosition = transform.position;
         }
     }

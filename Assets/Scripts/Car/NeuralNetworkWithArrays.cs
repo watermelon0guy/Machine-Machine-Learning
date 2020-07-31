@@ -7,7 +7,7 @@ public class NeuralNetworkWithArrays
 {
     public int number;
 
-    public static int inputLayer = 3, hiddenLayer = 10, hiddenLayerCount = 1, outputLayer = 2;
+    public static int inputLayer = 5, hiddenLayer = 10, hiddenLayerCount = 1, outputLayer = 2;
     
     public double[,] inputNodes = new double[inputLayer, 1];
     

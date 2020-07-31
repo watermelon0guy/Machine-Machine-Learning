@@ -60,7 +60,7 @@ public class GeneticAlgoritmCar : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             nextPopulation.Add(Instantiate(agent, spawnPoint.position, spawnPoint.rotation));
-            nextPopulation.Last().GetComponent<Car>().network = NetCopy(currentPopulation[0].GetComponent<Car>().network);
+            nextPopulation.Last().GetComponent<Car>().network = NetCopy(currentPopulation[i].GetComponent<Car>().network);
         }
 
 
