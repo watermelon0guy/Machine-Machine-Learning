@@ -1,4 +1,8 @@
 # Unity3D generated meta files
+[Ll]ibrary/
+[Ll]ocal[Cc]ache/
+[Oo]bj/
+[Tt]emp/
 *.pidb.meta
 
 ###
