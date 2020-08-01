@@ -74,6 +74,7 @@ public class Car : MonoBehaviour
             {
                 inf.aliveCreature -= 1;
                 canWrite = false;
+                transform.gameObject.SetActive(false);
             }
         }
 
@@ -90,10 +91,11 @@ public class Car : MonoBehaviour
             timeForCheckPos = 0;
             totalDistanceTravelled += Vector3.Distance(transform.position, lastPosition);
             avgSpeed = totalDistanceTravelled / timeSinceStart;
-            if (Vector3.Distance(transform.position, lastPosition) < 0.05)
+            if (Vector3.Distance(transform.position, lastPosition) < 0.05 && canWrite)
             {
                 alive = false;
-                inf.aliveCreature -= 0;
+                inf.aliveCreature -= 1;
+                canWrite = false;
             }
 
             overallFitness = (totalDistanceTravelled * distanceMultipler) + (FitnessOfSensors() * sensorMultiplier) +(avgSpeed * avgSpeedMultiplier);

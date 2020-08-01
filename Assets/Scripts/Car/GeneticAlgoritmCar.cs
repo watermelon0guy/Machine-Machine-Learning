@@ -8,11 +8,9 @@ public class GeneticAlgoritmCar : MonoBehaviour
 {
     [Header("Agent Setup")]
     public GameObject agent;
-    public Car mostEff;
     public Transform spawnPoint;
     [Header("Population Settings")]
     public int countOfAgentsInOnePopulation = 40;
-    public int countOfCrossovers = 30;
     public int mutationTimes = 1;
     [Range(0f,1f)]
     public float mutantChance = 0.05f;
@@ -23,12 +21,14 @@ public class GeneticAlgoritmCar : MonoBehaviour
     public List<GameObject> nextPopulation = new List<GameObject>();
     public Information inf;
 
+    public bool nextWave = true;
     public bool start = false;
 
     void Awake()
     {
         inf.aliveCreature = 0;
-        SpawnPopulation();
+        inf.currentGeneration = 0;
+        countOfAgentsInOnePopulation = inf.countOfAgentsInOnePopulation;
     }
 
     public void SpawnPopulation()
@@ -45,6 +45,8 @@ public class GeneticAlgoritmCar : MonoBehaviour
     {
         if (!start) return;
         currentTimeForOnePopulation += Time.fixedDeltaTime;
+        inf.timeSinceStartOfGen = currentTimeForOnePopulation;
+        if (!nextWave) return;
         if (currentTimeForOnePopulation >= timeForOnePopulation || inf.aliveCreature == 0)
         {
             currentTimeForOnePopulation = 0;
@@ -55,6 +57,7 @@ public class GeneticAlgoritmCar : MonoBehaviour
 
     void Repopulate()
     {
+        inf.currentGeneration += 1;
         currentPopulation = SortByFitness(currentPopulation);
 
         for (int i = 0; i < 5; i++)
@@ -75,7 +78,6 @@ public class GeneticAlgoritmCar : MonoBehaviour
             if(Random.value < mutantChance)
             {
                 Mutate(nextPopulation.Last().GetComponent<Car>().network,mutationTimes);
-                Debug.Log("========================================== MUTATION ==========================================");
             }
 
             nextPopulation.Add(Instantiate(agent, spawnPoint.position, spawnPoint.rotation));
@@ -84,7 +86,6 @@ public class GeneticAlgoritmCar : MonoBehaviour
             if (Random.value < mutantChance)
             {
                 Mutate(nextPopulation.Last().GetComponent<Car>().network, mutationTimes);
-                Debug.Log("========================================== MUTATION ==========================================");
             }
         }
 
@@ -239,7 +240,7 @@ public class GeneticAlgoritmCar : MonoBehaviour
     List<NeuralNetworkWithArrays> TournamentChoice(List<GameObject> population)
     {
         List<NeuralNetworkWithArrays> newNets = new List<NeuralNetworkWithArrays>();
-        while (newNets.Count < countOfCrossovers)
+        while (newNets.Count < countOfAgentsInOnePopulation - 4)
         {
             Car first = population[Random.Range(0,population.Count)].GetComponent<Car>();
             Car second = population[Random.Range(0, population.Count)].GetComponent<Car>();

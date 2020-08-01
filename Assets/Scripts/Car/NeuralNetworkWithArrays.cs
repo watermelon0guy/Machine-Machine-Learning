@@ -61,29 +61,6 @@ public class NeuralNetworkWithArrays
         }
     }
 
-    public NeuralNetworkWithArrays CopyNet()
-    {
-        NeuralNetworkWithArrays netCopy = new NeuralNetworkWithArrays();
-
-        for (int i = 0; i > weightsInputLayer.GetLength(0); i++)
-        {
-            for (int j = 0; j > weightsInputLayer.GetLength(1); j++)
-            {
-                netCopy.weightsInputLayer[i, j] = weightsInputLayer[i, j];
-            }
-        }
-
-        for (int i = 0; i > weightsHiddneLayers.GetLength(0); i++)
-        {
-            for (int j = 0; j > weightsHiddneLayers.GetLength(1); j++)
-            {
-                netCopy.weightsHiddneLayers[i, j] = weightsHiddneLayers[i, j];
-            }
-        }
-
-        return netCopy;
-    }
-
     public void Calculate()
     {
         switch (kindOfActivationFunction)
